@@ -2,78 +2,88 @@ number_of_request = 8
 apartment_floor = 200
 
 
-# Function to perform C-LOOK on the request array starting from the given floor
-def c_look(arr, reference_floor):
-    seek_count = 0
-    distance = 0
-    current_floor = 0
+class Elevator:
+    def __init__(self, request_array, reference_floor):
+        self.request_array = request_array
+        self.reference_floor = reference_floor
+        self.move_direction = 'up'
 
-    down = []
-    up = []
+    # Function to perform C-LOOK on the request array starting from the given floor
+    def c_look(self):
+        seek_count = 0
+        distance = 0
+        current_floor = 0
 
-    seek_sequence = []
+        down = []
+        up = []
 
-    # floors under the current floor will be serviced once the elevator comes back to the beginning (bottom end, 0 floor)
+        seek_sequence = []
 
-    for i in range(number_of_request):
-        if arr[i] < reference_floor:
-            down.append(arr[i])
-        if arr[i] > reference_floor:
-            up.append(arr[i])
+        # floors under the current floor will be serviced once the elevator comes back to the beginning (bottom end, 0 floor)
 
-    # Sorting down and up request arrays
-    down.sort()
-    up.sort()
+        for i in range(number_of_request):
+            if self.request_array[i] < self.reference_floor:
+                down.append(self.request_array[i])
+            if self.request_array[i] > self.reference_floor:
+                up.append(self.request_array[i])
 
-    # First service the requests on the up side of the current floor
-    for i in range(len(up)):
-        current_floor = up[i]
+        # Sorting down and up request arrays
+        down.sort()
+        up.sort()
 
-        # Appending current track
-        # seek sequence
-        seek_sequence.append(current_floor)
+        self.move_direction = 'up'
+        # First service the requests on the up side of the current floor
+        for i in range(len(up)):
+            current_floor = up[i]
 
-        # Calculate absolute distance
-        distance = abs(current_floor - reference_floor)
+            # Appending current track
+            # seek sequence
+            seek_sequence.append(current_floor)
 
-        # Increase the total count
-        seek_count += distance
+            # Calculate absolute distance
+            distance = abs(current_floor - self.reference_floor)
 
-        # Accessed floor is now new current_floor(head)
-        reference_floor = current_floor
+            # Increase the total count
+            seek_count += distance
 
-    # Once reached the up end jump to the last floor that is needed to be serviced in bottom direction
-    seek_count += abs(reference_floor - down[0])
-    reference_floor = down[0]
+            # Accessed floor is now new current_floor(head)
+            self.reference_floor = current_floor
 
-    # Now service the requests again which are bottom
-    for i in range(len(down)):
-        current_floor = down[i]
+        # Once reached the up end jump to the last floor that is needed to be serviced in bottom direction
+        seek_count += abs(self.reference_floor - down[0])
+        self.reference_floor = down[0]
 
-        # Appending current track to
-        # seek sequence
-        seek_sequence.append(current_floor)
+        self.move_direction = 'down'
+        # Now service the requests again which are bottom
+        for i in range(len(down)):
+            current_floor = down[i]
 
-        # Calculate absolute distance
-        distance = abs(current_floor - reference_floor)
+            # Appending current track to
+            # seek sequence
+            seek_sequence.append(current_floor)
 
-        # Increase the total count
-        seek_count += distance
+            # Calculate absolute distance
+            distance = abs(current_floor - self.reference_floor)
 
-        # Accessed track is now the new head
-        reference_floor = current_floor
+            # Increase the total count
+            seek_count += distance
 
-    print("Total number of seek operations =", seek_count)
-    print("Seek Sequence is")
+            # Accessed track is now the new head
+            self.reference_floor = current_floor
 
-    for i in range(len(seek_sequence)):
-        print(seek_sequence[i])
+        print("Total number of seek operations =", seek_count)
+        print("Seek Sequence is")
 
+        for i in range(len(seek_sequence)):
+            print(seek_sequence[i])
+
+
+elevator = Elevator([], 5)
+elevator2 = Elevator([], 5)
+elevator3 = Elevator([], 5)
 
 # Request array
-request_array = [1, 2, 3, 4, 5, 6, 7, 8]
+requests = [1, 2, 3, 4, 5, 6, 7, 8]
 initial_floor = 5
 
 print("Initial position of head:", initial_floor)
-
-c_look(request_array, initial_floor)
