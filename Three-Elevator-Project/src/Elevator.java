@@ -7,12 +7,14 @@ public class Elevator implements Runnable{
     private String direction;
     private Vector<Integer> requestArray;
     private int referenceFloor;
+    private int currentFloor;
 
-    public Elevator(String name, Vector<Integer> requestArray, int referenceFloor, String direction)
+    public Elevator(String name, Vector<Integer> requestArray, int referenceFloor, String direction, int currentFloor)
     {
         this.name = name;
         this.requestArray = requestArray;
         this.referenceFloor = referenceFloor;
+        this.currentFloor = currentFloor;
         this.direction = direction;
     }
 
@@ -33,6 +35,8 @@ public class Elevator implements Runnable{
         return referenceFloor;
     }
 
+    public int getCurrentFloor() {return currentFloor;}
+
     public String getDirection() {
         return direction;
     }
@@ -44,7 +48,7 @@ public class Elevator implements Runnable{
                 continue;
             Vector<Integer> currentRequestArray = (Vector<Integer>) this.getRequestArray().clone();
             setRequestArray(new Vector<>());
-            int relocation = 0, currentFloor, distance;
+            int relocation = 0, distance;
             ArrayList<Integer> up = new ArrayList<>();
             ArrayList<Integer> down = new ArrayList<>();
             ArrayList<Integer> floorSequence = new ArrayList<>();
@@ -66,13 +70,10 @@ public class Elevator implements Runnable{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                currentFloor = upRequest;
-                 /*
-                    elevator go up distance pixel in distance / 10 time
-                 */
-                floorSequence.add(currentFloor);
+                this.currentFloor = upRequest;
+                floorSequence.add(this.currentFloor);
                 relocation += distance;
-                this.referenceFloor = currentFloor;
+                this.referenceFloor = this.currentFloor;
             }
 
             if (down.size() != 0)
@@ -80,10 +81,6 @@ public class Elevator implements Runnable{
                 this.direction = "down";
                 distance = Math.abs(this.referenceFloor - down.get(0));
                 relocation += distance;
-                /*
-                   elevator go down distance pixel in distance / 10 time
-                   sleep(distance / 10)
-                */
                 try {
                     Thread.sleep(distance * 1000L);
                 } catch (InterruptedException e) {
@@ -99,14 +96,10 @@ public class Elevator implements Runnable{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                currentFloor = downRequest;
-                 /*
-                    elevator go up distance pixel in distance / 10 time
-                    sleep(distance / 10)
-                 */
-                floorSequence.add(currentFloor);
+                this.currentFloor = downRequest;
+                floorSequence.add(this.currentFloor);
                 relocation += distance;
-                this.referenceFloor = currentFloor;
+                this.referenceFloor = this.currentFloor;
             }
 
             if (relocation != 0)

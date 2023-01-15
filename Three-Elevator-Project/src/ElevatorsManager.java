@@ -1,10 +1,24 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 import java.util.Vector;
 
-public class ElevatorsManager {
-    //static String str;
+public class ElevatorsManager extends Application {
 
     private static int relocationCalculate(Vector<Integer> requestArray, int newFloor, int referenceFloor, String direction) {
         int relocation = 0, currentFloor, distance;
@@ -61,52 +75,122 @@ public class ElevatorsManager {
 }
 
     public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        int WIDTH = 1500;
+        int HEIGHT = 900;
         int apartmentFloor = 15;
-        Scanner input = new Scanner(System.in);
         System.out.println("-------------------------------------------------------------------------------------------");
         System.out.println("                       All elevators in 0 floor at first.");
         System.out.println("-------------------------------------------------------------------------------------------");
-        Elevator elevator = new Elevator("elevator A", new Vector<>(), 0, "up");
-        Elevator elevator2 = new Elevator("elevator B", new Vector<>(), 0, "up");
-        Elevator elevator3 = new Elevator("elevator C", new Vector<>(), 0, "up");
+        Elevator elevator = new Elevator("elevator A", new Vector<>(), 0, "up", 0);
+        Elevator elevator2 = new Elevator("elevator B", new Vector<>(), 0, "up", 0);
+        Elevator elevator3 = new Elevator("elevator C", new Vector<>(), 0, "up", 0);
         Thread elevatorThread = new Thread(elevator);
         Thread elevator2Thread = new Thread(elevator2);
         Thread elevator3Thread = new Thread(elevator3);
         elevatorThread.start();
         elevator2Thread.start();
         elevator3Thread.start();
-//        Thread reader = new Thread(() -> {
-//            while (true) {
-//                str = input.nextLine();
-//            }
-//        });
-        String[] request;
-        String str;
-        int newFloor, elevatorRelocationNeeded, elevator2RelocationNeeded, elevator3RelocationNeeded, minRelocationNeeded;
-        while (true) {
-            str = input.nextLine();
-            if (!str.isBlank())
+
+        GridPane[] elevatorsButtons = {new GridPane(), new GridPane(), new GridPane(), new GridPane()};
+        buttonsCreate(elevator, elevator2, elevator3, elevatorsButtons);
+
+        Rectangle[] elevatorsRectangles = new Rectangle[3];
+        elevatorsRectanglesCreate(elevatorsRectangles);
+
+
+        VBox[] columns = {new VBox(), new VBox(), new VBox(), new VBox()};
+        columns[0].setAlignment(Pos.CENTER);
+        for (int i = 0; i < 4; i++) {
+            columns[i].prefWidthProperty().bind(stage.widthProperty().multiply(0.25));
+            if (i > 0)
             {
-               request = str.split(":");
-               newFloor = Integer.parseInt(request[1]);
-                switch (request[0]) {
-                    case "int" -> elevator.getRequestArray().add(newFloor);
-                    case "int2" -> elevator2.getRequestArray().add(newFloor);
-                    case "int3" -> elevator3.getRequestArray().add(newFloor);
-                    case "ext" -> {
-                        elevatorRelocationNeeded = relocationCalculate(elevator.getRequestArray(), newFloor, elevator.getReferenceFloor(), elevator.getDirection());
-                        elevator2RelocationNeeded = relocationCalculate(elevator2.getRequestArray(), newFloor, elevator2.getReferenceFloor(), elevator2.getDirection());
-                        elevator3RelocationNeeded = relocationCalculate(elevator3.getRequestArray(), newFloor, elevator3.getReferenceFloor(), elevator3.getDirection());
-                        minRelocationNeeded = Math.min(Math.min(elevatorRelocationNeeded, elevator2RelocationNeeded), elevator3RelocationNeeded);
-                        if (minRelocationNeeded == elevatorRelocationNeeded)
-                            elevator.getRequestArray().add(newFloor);
-                        else if (minRelocationNeeded == elevator2RelocationNeeded)
-                            elevator2.getRequestArray().add(newFloor);
-                        else
-                            elevator3.getRequestArray().add(newFloor);
-                    }
-                }
+                columns[i].setAlignment(Pos.BOTTOM_CENTER);
+                columns[i].getChildren().add(elevatorsRectangles[i - 1]);
             }
+
+            columns[i].getChildren().add(elevatorsButtons[i]);
         }
+
+
+        HBox root = new HBox();
+
+        Timeline showing = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
+            int elevatorNewFloor = 0, elevator2NewFloor = 0, elevator3NewFloor = 0;
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                elevatorNewFloor = elevator.getCurrentFloor();
+                elevator2NewFloor = elevator2.getCurrentFloor();
+                elevator3NewFloor = elevator3.getCurrentFloor();
+                moveRectangle(elevatorsRectangles, elevatorNewFloor, elevator2NewFloor, elevator3NewFloor);
+                root.getChildren().clear();
+                root.getChildren().addAll(columns);
+            }
+        }));
+
+        showing.setCycleCount(Timeline.INDEFINITE);
+        showing.play();
+
+
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        stage.setTitle("Elevators");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void buttonsCreate(Elevator elevator, Elevator elevator2, Elevator elevator3, GridPane[] elevatorsButtons)
+    {
+        Button[] elevatorOutButtons = new Button[15];
+        Button[] elevatorInButtons = new Button[15];
+        Button[] elevator2InButtons = new Button[15];
+        Button[] elevator3InButtons = new Button[15];
+
+        for (int i = 0; i < 15; i++) {
+            int buttonClickedNumber = i;
+            elevatorOutButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevatorInButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevator2InButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevator3InButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevatorOutButtons[i].setOnAction(actionEvent -> {
+                int elevatorRelocationNeeded = relocationCalculate(elevator.getRequestArray(), buttonClickedNumber, elevator.getReferenceFloor(), elevator.getDirection());
+                int elevator2RelocationNeeded = relocationCalculate(elevator2.getRequestArray(), buttonClickedNumber, elevator2.getReferenceFloor(), elevator2.getDirection());
+                int elevator3RelocationNeeded = relocationCalculate(elevator3.getRequestArray(), buttonClickedNumber, elevator3.getReferenceFloor(), elevator3.getDirection());
+                int minRelocationNeeded = Math.min(Math.min(elevatorRelocationNeeded, elevator2RelocationNeeded), elevator3RelocationNeeded);
+                if (minRelocationNeeded == elevatorRelocationNeeded)
+                    elevator.getRequestArray().add(buttonClickedNumber);
+                else if (minRelocationNeeded == elevator2RelocationNeeded)
+                    elevator2.getRequestArray().add(buttonClickedNumber);
+                else
+                    elevator3.getRequestArray().add(buttonClickedNumber);
+            });
+            elevatorInButtons[i].setOnAction(actionEvent -> elevator.getRequestArray().add(buttonClickedNumber));
+            elevator2InButtons[i].setOnAction(actionEvent -> elevator2.getRequestArray().add(buttonClickedNumber));
+            elevator3InButtons[i].setOnAction(actionEvent -> elevator3.getRequestArray().add(buttonClickedNumber));
+        }
+
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 3; j++) {
+                elevatorsButtons[0].add(elevatorOutButtons[i * 3 + j], j, i);
+                elevatorsButtons[1].add(elevatorInButtons[i * 3 + j], j, i);
+                elevatorsButtons[2].add(elevator2InButtons[i * 3 + j], j, i);
+                elevatorsButtons[3].add(elevator3InButtons[i * 3 + j], j, i);
+            }
+    }
+
+    private void elevatorsRectanglesCreate(Rectangle[] elevators) {
+        for (int i = 0; i < 3; i++) {
+            elevators[i] = new Rectangle(50, 50);
+            elevators[i].setFill(new Color(0.5, 0.5, 0.5, 0.5));
+        }
+    }
+
+    private void moveRectangle(Rectangle[] elevators, int elevatorCurrentFloor, int elevator2CurrentFloor, int elevator3CurrentFloor) {
+        elevators[0].setTranslateY(-elevatorCurrentFloor * 50);
+        elevators[1].setTranslateY(-elevator2CurrentFloor * 50);
+        elevators[2].setTranslateY(-elevator3CurrentFloor * 50);
     }
 }

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d75824a8-7461-4e8f-8bec-552c095ee13d" name="Changes" comment="" />
+    <list default="true" id="d75824a8-7461-4e8f-8bec-552c095ee13d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Three-Elevator-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Three-Elevator-Project/src/Elevator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project/src/Elevator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Three-Elevator-Project/src/ElevatorsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project/src/ElevatorsManager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,9 +32,28 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../University_Semester/2/AdvancedProgramming/Codes/Projects/RSBankGit" />
+    <property name="last_opened_file_path" value="C:/javafx/lib" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MTHome" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ElevatorsManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ElevatorsManager" />
+      <module name="Three-Elevator-Project" />
+      <option name="VM_PARAMETERS" value="--module-path C:\javafx\lib --add-modules=javafx.controls " />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ElevatorsManager" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -38,10 +65,22 @@
       <updated>1673275551967</updated>
       <workItem from="1673275553503" duration="11000" />
       <workItem from="1673362005158" duration="5000" />
+      <workItem from="1673774609705" duration="15358000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

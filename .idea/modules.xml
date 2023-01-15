@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Three-Elevator-Project.iml" filepath="$PROJECT_DIR$/Three-Elevator-Project.iml" />
+      <module fileurl="file://C:/javafx/lib/lib.iml" filepath="C:/javafx/lib/lib.iml" />
     </modules>
   </component>
 </project>
