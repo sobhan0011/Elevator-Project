@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d75824a8-7461-4e8f-8bec-552c095ee13d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Three-Elevator-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Three-Elevator-Project/src/Elevator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project/src/Elevator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Three-Elevator-Project/src/ElevatorsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project/src/ElevatorsManager.java" afterDir="false" />
     </list>
@@ -66,6 +62,7 @@
       <workItem from="1673275553503" duration="11000" />
       <workItem from="1673362005158" duration="5000" />
       <workItem from="1673774609705" duration="15358000" />
+      <workItem from="1673792731352" duration="2204000" />
     </task>
     <servers />
   </component>
@@ -82,5 +79,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

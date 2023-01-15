@@ -6,14 +6,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Vector;
@@ -98,7 +99,9 @@ public class ElevatorsManager extends Application {
 
         GridPane[] elevatorsButtons = {new GridPane(), new GridPane(), new GridPane(), new GridPane()};
         buttonsCreate(elevator, elevator2, elevator3, elevatorsButtons);
-
+        for (GridPane elevatorsButton : elevatorsButtons) {
+            elevatorsButton.setHgap(20.0);
+        }
         Rectangle[] elevatorsRectangles = new Rectangle[3];
         elevatorsRectanglesCreate(elevatorsRectangles);
 
@@ -119,7 +122,7 @@ public class ElevatorsManager extends Application {
 
         HBox root = new HBox();
 
-        Timeline showing = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
+        Timeline showing = new Timeline(new KeyFrame(Duration.seconds(0.25), new EventHandler<>() {
             int elevatorNewFloor = 0, elevator2NewFloor = 0, elevator3NewFloor = 0;
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -152,9 +155,13 @@ public class ElevatorsManager extends Application {
         for (int i = 0; i < 15; i++) {
             int buttonClickedNumber = i;
             elevatorOutButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevatorOutButtons[i].prefWidth(20);
             elevatorInButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevatorOutButtons[i].prefWidth(20);
             elevator2InButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevatorOutButtons[i].prefWidth(20);
             elevator3InButtons[i] = new Button(String.valueOf(buttonClickedNumber + 1));
+            elevatorOutButtons[i].prefWidth(20);
             elevatorOutButtons[i].setOnAction(actionEvent -> {
                 int elevatorRelocationNeeded = relocationCalculate(elevator.getRequestArray(), buttonClickedNumber, elevator.getReferenceFloor(), elevator.getDirection());
                 int elevator2RelocationNeeded = relocationCalculate(elevator2.getRequestArray(), buttonClickedNumber, elevator2.getReferenceFloor(), elevator2.getDirection());
@@ -182,15 +189,18 @@ public class ElevatorsManager extends Application {
     }
 
     private void elevatorsRectanglesCreate(Rectangle[] elevators) {
+        File input = new File("data/Silver.jpg");
+        Image silver = new Image(input.toURI().toString());
+        ImagePattern silverPattern = new ImagePattern(silver);
         for (int i = 0; i < 3; i++) {
-            elevators[i] = new Rectangle(50, 50);
-            elevators[i].setFill(new Color(0.5, 0.5, 0.5, 0.5));
+            elevators[i] = new Rectangle(50, 100);
+            elevators[i].setFill(silverPattern);
         }
     }
 
     private void moveRectangle(Rectangle[] elevators, int elevatorCurrentFloor, int elevator2CurrentFloor, int elevator3CurrentFloor) {
-        elevators[0].setTranslateY(-elevatorCurrentFloor * 50);
-        elevators[1].setTranslateY(-elevator2CurrentFloor * 50);
-        elevators[2].setTranslateY(-elevator3CurrentFloor * 50);
+        elevators[0].setTranslateY(-elevatorCurrentFloor * 45);
+        elevators[1].setTranslateY(-elevator2CurrentFloor * 45);
+        elevators[2].setTranslateY(-elevator3CurrentFloor * 45);
     }
 }
