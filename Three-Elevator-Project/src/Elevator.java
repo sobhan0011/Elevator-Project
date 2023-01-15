@@ -66,7 +66,7 @@ public class Elevator implements Runnable{
             for (Integer upRequest : up) {
                 distance = Math.abs(upRequest - this.referenceFloor);
                 try {
-                    Thread.sleep(distance * 500);
+                    Thread.sleep(distance * 250L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -82,7 +82,7 @@ public class Elevator implements Runnable{
                 distance = Math.abs(this.referenceFloor - down.get(0));
                 relocation += distance;
                 try {
-                    Thread.sleep(distance * 1000L);
+                    Thread.sleep(distance * 250L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -92,7 +92,7 @@ public class Elevator implements Runnable{
             for (Integer downRequest : down) {
                 distance = Math.abs(downRequest - this.referenceFloor);
                 try {
-                    Thread.sleep(distance * 1000L);
+                    Thread.sleep(distance * 250L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
