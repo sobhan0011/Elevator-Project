@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d75824a8-7461-4e8f-8bec-552c095ee13d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/button.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Three-Elevator-Project/src/Elevator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project/src/Elevator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Three-Elevator-Project/src/ElevatorsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Three-Elevator-Project/src/ElevatorsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Silver.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/a.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Three-Elevator-Project/Elevator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Three-Elevator-Project/Elevator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Three-Elevator-Project/ElevatorsManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Three-Elevator-Project/ElevatorsManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/button.css" beforeDir="false" afterPath="$PROJECT_DIR$/data/button.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +77,8 @@
       <workItem from="1673795585373" duration="195000" />
       <workItem from="1673797802745" duration="2621000" />
       <workItem from="1673807450569" duration="1439000" />
+      <workItem from="1673809304193" duration="24000" />
+      <workItem from="1673809538756" duration="936000" />
     </task>
     <servers />
   </component>
